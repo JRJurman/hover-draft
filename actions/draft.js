@@ -9,6 +9,7 @@ const newPlayer = (player) => Object.assign({}, player, {
 
 module.exports = (seed) => ({
   init: () => ({
+    // should be object with ids
     players: [],
     cards: [],
     seed: seed,
@@ -52,7 +53,7 @@ module.exports = (seed) => ({
     return newDraft
   },
   advanceDraft: (draft) => {
-    const nextPacks = rotate(draft.players.pack, draft.direction)
+    const nextPacks = rotate(draft.players.map(player => player.pack), draft.direction)
     const newPlayers = draft.players.map((player, playerIndex) =>
       update(player, {
         status: 'picking',
